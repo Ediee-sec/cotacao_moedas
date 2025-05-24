@@ -1,0 +1,14 @@
+{
+    "code": "moeda_origem",
+    "codein": "moeda_destino",
+    "name": "nome",
+    "high": "maior_cotacao",
+    "low": "menor_cotacao",
+    "varBid": "variacao",
+    "pctChange": "percentual_variacao",
+    "bid": "cotacao_compra",
+    "ask": "cotacao_venda",
+    "timestamp": "data_hora",
+    "create_date": "data_criacao"
+  }
+  
