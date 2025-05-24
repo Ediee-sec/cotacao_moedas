@@ -7,8 +7,9 @@ Este projeto é um sistema ETL (Extract, Transform, Load) que coleta dados de co
 ```
 currency_quotes/
 ├── config/
-│   └── db.ini
-|   └── api_key.ini
+│   ├── db.ini
+│   ├── api_key.ini
+│   └── api_key.ini.example
 ├── json/
 │   └── columns_df.json
 ├── src/
@@ -49,7 +50,7 @@ Gerencia a conexão com o banco de dados e a inserção dos dados.
   - psycopg2
   - requests
 
-### Arquivo de Configuração (db.ini)
+### Arquivo de Configuração do Banco (db.ini)
 ```ini
 [postgresql]
 host=seu_host
@@ -58,6 +59,14 @@ database=seu_banco
 user=seu_usuario
 password=sua_senha
 ```
+
+### Arquivo de Configuração da API (api_key.ini)
+```ini
+[api]
+key=sua_chave_api_aqui
+```
+
+Nota: Renomeie o arquivo `api_key.ini.example` para `api_key.ini` e adicione sua chave da API.
 
 ### Estrutura da Tabela
 ```sql
@@ -88,6 +97,7 @@ cd currency_quotes
 
 2. Configure o ambiente:
 - Crie um arquivo `config/db.ini` com as configurações do seu banco de dados
+- Renomeie `config/api_key.ini.example` para `config/api_key.ini` e adicione sua chave da API
 - Instale as dependências:
 ```bash
 pip install -r requirements.txt

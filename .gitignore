@@ -1,6 +1,6 @@
 # Arquivos de configuração
 config/db.ini
-config/api.ini
+config/api_key.ini
 .env
 
 # Byte-compiled / optimized / DLL files
