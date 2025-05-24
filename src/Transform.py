@@ -8,12 +8,19 @@ class TransformData:
         self.extract = ExtractData().get_data()
 
     def create_dataframe(self):
-        # Pega apenas os valores do dicionário e cria o DataFrame
+        """
+        Cria um DataFrame a partir dos dados da API
+        Retorna: DataFrame com os dados da API
+        """
         df = pd.DataFrame([self.extract['USDBRL']])
         df.columns = ['code', 'codein', 'name', 'high', 'low', 'varBid', 'pctChange', 'bid', 'ask', 'timestamp', 'create_date']
         return df
     
     def trasnform_data_type(self):
+        """
+        Converte os tipos de dados do DataFrame
+        Retorna: DataFrame com os dados convertidos
+        """
         df = self.create_dataframe()
         df['high'] = df['high'].astype(float)
         df['low'] = df['low'].astype(float)
@@ -24,6 +31,10 @@ class TransformData:
         return df
     
     def transform_data_rename_columns(self):
+        """
+        Renomeia as colunas do DataFrame
+        Retorna: DataFrame com as colunas renomeadas
+        """
         with open('json/columns_df.json', 'r') as file:
             columns_rename_df = json.load(file)
 
@@ -37,8 +48,11 @@ class TransformData:
         return df
     
     def main(self):
+        """
+        Método principal para transformar os dados
+        Retorna: DataFrame com os dados transformados
+        """
         df = self.add_columns_dt_process()
-        # Garantir a ordem correta das colunas para inserção no banco
         columns_order = ['moeda_origem', 'moeda_destino', 'nome', 'maior_cotacao', 'menor_cotacao', 
                         'variacao', 'percentual_variacao', 'cotacao_compra', 'cotacao_venda', 
                         'data_hora', 'data_criacao', 'data_processamento']
