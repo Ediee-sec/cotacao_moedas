@@ -1,20 +1,22 @@
 import psycopg2
 from Transform import TransformData
-import configparser
+import os
 from logger import ETLLogger
 
 class Credentials:
     """
-    Classe para obter as credenciais do banco de dados
+    Classe para obter as credenciais do banco de dados a partir de uma conexão do Airflow
     """
     def __init__(self):
-        self.config = configparser.ConfigParser()
-        self.config.read('config/db.ini')
-        self.host = self.config['postgresql']['host']
-        self.port = self.config['postgresql']['port']
-        self.database = self.config['postgresql']['database']
-        self.user = self.config['postgresql']['user']
-        self.password = self.config['postgresql']['password']
+        try:
+            self.host = os.environ.get('POSTGRES_HOST')
+            self.port = os.environ.get('POSTGRES_PORT')
+            self.database = os.environ.get('POSTGRES_DB')
+            self.user = os.environ.get('POSTGRES_USER')
+            self.password = os.environ.get('POSTGRES_PASSWORD')
+        except Exception as e:
+            if not all([self.host, self.port, self.database, self.user, self.password]):
+                raise ValueError(f"Não foi possível obter as credenciais do banco de dados. Erro original: {str(e)}")
 
 
 class LoadData(Credentials):

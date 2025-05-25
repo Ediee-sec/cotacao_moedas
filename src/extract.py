@@ -1,6 +1,6 @@
 import requests
-import configparser
 from logger import ETLLogger
+import os
 
 class Credentials:
     """
@@ -10,9 +10,10 @@ class Credentials:
         api_key: Chave da API
     """
     def __init__(self):
-        self.config = configparser.ConfigParser()
-        self.config.read('config/api_key.ini')
-        self.api_key = self.config['API_KEY']['key']
+        try:
+            self.api_key = os.environ.get('API_KEY')
+        except Exception as e:
+            raise ValueError(f"Não foi possível obter a chave da API. Erro original: {str(e)}")
 
 class ExtractData(Credentials):
     """

@@ -6,10 +6,6 @@ Este projeto é um sistema ETL (Extract, Transform, Load) que coleta dados de co
 
 ```
 currency_quotes/
-├── config/
-│   ├── db.ini
-│   ├── api_key.ini
-│   └── api_key.ini.example
 ├── json/
 │   └── columns_df.json
 ├── src/
@@ -50,23 +46,24 @@ Gerencia a conexão com o banco de dados e a inserção dos dados.
   - psycopg2
   - requests
 
-### Arquivo de Configuração do Banco (db.ini)
-```ini
-[postgresql]
-host=seu_host
-port=sua_porta
-database=seu_banco
-user=seu_usuario
-password=sua_senha
+### Variáveis de Ambiente
+O projeto utiliza variáveis de ambiente para configuração. Configure as seguintes variáveis:
+
+Para o banco de dados PostgreSQL:
+```bash
+export POSTGRES_HOST=seu_host
+export POSTGRES_PORT=sua_porta
+export POSTGRES_DB=seu_banco
+export POSTGRES_USER=seu_usuario
+export POSTGRES_PASSWORD=sua_senha
 ```
 
-### Arquivo de Configuração da API (api_key.ini)
-```ini
-[api]
-key=sua_chave_api_aqui
+Para a API de cotações:
+```bash
+export API_KEY=sua_chave_api_aqui
 ```
 
-Nota: Renomeie o arquivo `api_key.ini.example` para `api_key.ini` e adicione sua chave da API.
+Você pode adicionar essas variáveis ao seu arquivo `.env` ou configurá-las diretamente no seu ambiente.
 
 ### Estrutura da Tabela
 ```sql
@@ -96,8 +93,7 @@ cd currency_quotes
 ```
 
 2. Configure o ambiente:
-- Crie um arquivo `config/db.ini` com as configurações do seu banco de dados
-- Renomeie `config/api_key.ini.example` para `config/api_key.ini` e adicione sua chave da API
+- Configure as variáveis de ambiente necessárias (conforme seção "Variáveis de Ambiente")
 - Instale as dependências:
 ```bash
 pip install -r requirements.txt
